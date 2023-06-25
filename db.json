@@ -1,7 +1,29 @@
 {
-  "probe": {
-    "ipAddress": "192.168.0.17",
-    "status": "online",
-    "lastUpdate": "2023-06-25T12:30:00Z"
-  }
+  "probes": [
+    {
+      "ip": "192.168.0.69",
+      "status": "online",
+      "timestamp": 1687732612450
+    },
+    {
+      "ip": "192.168.0.69",
+      "status": "online",
+      "timestamp": 1687732631491
+    },
+    {
+      "ip": "192.168.0.69",
+      "status": "online",
+      "timestamp": 1687732690143
+    },
+    {
+      "ip": "192.168.0.69",
+      "status": "online",
+      "timestamp": 1687732700169
+    },
+    {
+      "ip": "192.168.0.69",
+      "status": "online",
+      "timestamp": 1687732710071
+    }
+  ]
 }
