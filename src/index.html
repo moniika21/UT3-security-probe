@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>État de la sonde</title>
+</head>
+
+<body>
+    <h1>État de la sonde</h1>
+    <div id="probe-status"></div>
+
+    <script>
+        // Effectuer une requête HTTP GET pour récupérer l'état de la sonde
+        fetch('/api/probe/status')
+            .then(response => response.json())
+            .then(data => {
+                // Afficher l'état de la sonde dans la page HTML
+                const probeStatusElement = document.getElementById('probe-status');
+                probeStatusElement.textContent = `État: ${data.status}, Adresse IP: ${data.ipAddress}, Dernière mise à jour: ${data.lastUpdate}`;
+            })
+            .catch(error => console.error(error));
+    </script>
+</body>
+
+</html>

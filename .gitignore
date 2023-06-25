@@ -1,0 +1,7 @@
+# Dossiers
+node_modules/
+dist/
+
+# Fichiers
+.env
+*.log
