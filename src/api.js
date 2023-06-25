@@ -40,7 +40,7 @@ app.get("/api/probe/status", authenticate, (req, res) => {
 app.post("/api/probe/update", authenticate, (req, res) => {
   const updatedProbe = req.body.probe;
   db.read();
-  db.data = updatedProbe;
+  db.data.probe = updatedProbe;
   db.write();
   res.send("L'état de la sonde a été mis à jour avec succès.");
 });

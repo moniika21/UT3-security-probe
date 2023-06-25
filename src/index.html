@@ -1,26 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>État de la sonde</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #probe-details {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        #probe-details p {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
     <h1>État de la sonde</h1>
-    <div id="probe-status"></div>
+    <div id="probe-details"></div>
 
     <script>
-        // Effectuer une requête HTTP GET pour récupérer l'état de la sonde
-        fetch('/api/probe/status')
-            .then(response => response.json())
-            .then(data => {
-                // Afficher l'état de la sonde dans la page HTML
-                const probeStatusElement = document.getElementById('probe-status');
-                probeStatusElement.textContent = `État: ${data.status}, Adresse IP: ${data.ipAddress}, Dernière mise à jour: ${data.lastUpdate}`;
-            })
-            .catch(error => console.error(error));
+        // Fonction pour effectuer une requête AJAX pour obtenir les données du JSON
+        function getProbeStatus() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '../db.json', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var probeData = JSON.parse(xhr.responseText);
+                    displayProbeStatus(probeData);
+                }
+            };
+            xhr.send();
+        }
+        
+        // probeData = {
+        //     "probe": {
+        //         "ipAddress": "192.168.0.19",
+        //         "status": "offline",
+        //         "lastUpdate": "2023-06-25T12:30:00Z"
+        //     }
+        // }
+        //displayProbeStatus(probeData);
+
+        // Fonction pour afficher les données du JSON dans la page web
+        function displayProbeStatus(probeData) {
+            var probeDetailsDiv = document.getElementById('probe-details');
+            var probeHtml = '';
+            probeHtml += '<p><strong>Adresse IP:</strong> ' + probeData.probe.ipAddress + '</p>';
+            probeHtml += '<p><strong>Statut:</strong> ' + probeData.probe.status + '</p>';
+            probeHtml += '<p><strong>Dernière mise à jour:</strong> ' + probeData.probe.lastUpdate + '</p>';
+            probeDetailsDiv.innerHTML = probeHtml;
+        }
+
+        // Appel de la fonction pour obtenir les données du JSON au chargement de la page
+        window.onload = getProbeStatus;
+        
     </script>
 </body>
 
