@@ -40,7 +40,7 @@
     <script>
         $(function () {
             $.ajax({
-                url: 'http://localhost:3000/probes',
+                url: 'http://84.46.249.148:3000/probes',
                 method: 'GET',
                 headers: {
                     'Authorization': 'test'
@@ -55,7 +55,7 @@
                         const statusEl = document.createElement('td');
                         const timestampEl = document.createElement('td');
 
-                        ipEl.textContent = probe.ip;
+                        ipEl.textContent = probe.ip || "192.168.1.173";
                         statusEl.textContent = probe.status;
                         timestampEl.textContent = moment(probe.timestamp/1000, 'X').format('DD/MM/YYYY HH:mm:ss');
 
